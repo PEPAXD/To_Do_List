@@ -252,4 +252,8 @@ label[for=username].has-text {
 }
 .buttons-container .login-buttons .google:hover i {
   color: white;
+}
+
+.my-toast {
+  top: 100px !important;
 }/*# sourceMappingURL=login.css.map */
