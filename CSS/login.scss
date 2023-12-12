@@ -1,0 +1,313 @@
+//  General styles 
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    overflow: hidden;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    
+}
+
+body {
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #2C3E50  ;
+    transform: scale(1.2);
+}
+
+main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+    
+}
+
+.ToDoImg{
+
+    position: relative;
+    height: 31rem;
+    width: 31rem;
+
+    img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .MySocialNetworks {
+        position: absolute;
+
+        right: 29.4%;
+        bottom: 30.3%;
+
+
+        text-align: center;
+    
+        h2 {
+            margin-bottom: 0.8rem;
+            font-size: 16px;
+            font-weight: 400;
+        }
+    
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2.5rem;
+    
+    
+            a {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 3rem;
+                height: 3rem;
+
+                border: solid 2px #BAA9FF;
+
+                background-color: transparent;    
+                cursor: pointer;
+                transition: background-color 0.3s, color 0.3s ease;
+            }
+    
+            i {
+                font-size: 2em;
+                color: #463394;
+            }
+    
+            .linkedin:hover {
+                background-color: #0077b5;
+
+                i{
+                    color: white;
+                }
+            }
+    
+            .instagram:hover {
+                background-image: linear-gradient(-135deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D 80%);
+
+                i{
+                    color: white;
+                }
+            }
+    
+            .github:hover {
+                background-color: #333;
+
+                i{
+                    color: white;
+                }
+            }
+        }
+    }
+    
+}
+
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+.container {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+
+    height: 31rem;
+    
+    background-color: #fff;
+    padding: 1rem;
+    
+
+    .formContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+.container .heading {
+    font-size: 1.2em;
+    font-weight: bolder;
+    text-align: center;
+
+    p{
+        margin: 0.5rem 0rem;
+        font-size: 0.6em;
+        font-weight: 400;
+    }
+}
+
+.form {
+    width: 18rem;
+    display: flex;
+    flex-direction: column;
+
+    margin: 0rem 1rem;
+
+}
+
+.btn-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    padding: 10px;
+    width: 100%;
+    margin: 1rem;
+
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-radius: 10px;
+    border: solid 1px #8052ec;
+    border-bottom: solid 1px #90c2ff;
+    background: linear-gradient(45deg, #8052ec, #d161ff);
+    color: #fff;
+    font-weight: bolder;
+}
+
+.btn:active {
+    opacity: 0.5;
+}
+
+
+.input-field {
+    position: relative;
+    padding-top: 1rem;
+
+    label {
+        position: absolute;
+        color: #8d8d8d;
+        pointer-events: none;
+        background-color: transparent;
+        left: 15px;
+        transform: translateY(0.6rem);
+        transition: all 0.3s ease;
+    }
+
+    input {
+        padding: 10px 15px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: solid 1px #8d8d8d;
+        letter-spacing: 1px;
+        width: 100%;
+        
+    }
+}
+
+
+
+.input-field input:focus,
+.input-field input:valid {
+    outline: none;
+    border: solid 1px #8052ec;
+}
+
+.input-field input:focus ~ label,
+.input-field input:valid ~ label {
+    transform: translateY(-51%) translateX(-10px) scale(0.8);
+    background-color: #fff;
+    padding: 0px 5px;
+    color: #8052ec;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 100px;
+}
+
+label[for="email"].has-text {
+    transform: translateY(-51%) translateX(-10px) scale(0.8);
+    background-color: #fff;
+    padding: 0px 5px;
+    color: #8052ec;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 100px;
+}
+
+
+label[for="username"].has-text {
+    transform: translateY(-51%) translateX(-10px) scale(0.8);
+    background-color: #fff;
+    padding: 0px 5px;
+    color: #8052ec;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 100px;
+}
+
+.buttons-container {
+    text-align: center;
+    margin: 1rem;
+
+    h2 {
+        margin-bottom: 0.8rem;
+        font-size: 1.2em;
+
+        font-weight:lighter;
+    }
+
+    .login-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: 1rem;
+
+
+        button {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.2rem;
+            height: 3.2rem;
+            border: 1px solid #8052ec;
+
+
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s ease;
+        }
+
+        i {
+            font-size: 2em;
+            color: #8052ec;
+        }
+
+        .google:hover {
+            background-color: #dd4b39;
+            border-color: transparent;
+            i{
+                color: white;
+            }
+        }
+    }
+}
