@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     
 <head>
     <meta charset="UTF-8">
@@ -46,7 +46,7 @@
                         <p>Enter your email below to create or login your account</p>
                     </div>
 
-                    <form class="form" action="">
+                    <form id="SignUpForm" class="form" action="">
 
                         <div class="input-field">
                         <input
@@ -72,7 +72,7 @@
     
                 <!--SignLoginButton-->
                 <div class="btn-container">
-                    <button class="btn">Sign In with Email</button>
+                    <a href="#" id="add-CheckData" class="button-link btn">Sign In with Email</a>
                 </div>
             </div>
 
@@ -83,12 +83,15 @@
                     <button type="button" id="googleLogin" class="google"><i class="fab fa-google"></i></button>
                 </div>
             </div> 
-            
+
         </div>
     </main>
 
     <!-- Scripts -->
     <script src="../JS/inputsLayouts.js"></script>
+
+    <!-- Firebase -->
+    <script type="module" src="../JS/Email.js"></script>
 
     <!-- FontAwesome-->
     <script src="https://kit.fontawesome.com/542b53e460.js" crossorigin="anonymous"></script>

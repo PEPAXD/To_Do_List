@@ -169,7 +169,8 @@ main{
 
 }
 
-.btn-container {
+.button-link {
+    
     width: 100%;
     display: flex;
     align-items: center;
@@ -179,7 +180,7 @@ main{
 .btn {
     padding: 10px;
     width: 100%;
-    margin: 1rem;
+    margin: 1rem 0rem;
 
     font-size: 1rem;
     text-transform: uppercase;
@@ -190,11 +191,12 @@ main{
     background: linear-gradient(45deg, #8052ec, #d161ff);
     color: #fff;
     font-weight: bolder;
+
+    &:active {
+        opacity: 0.5;
+    }
 }
 
-.btn:active {
-    opacity: 0.5;
-}
 
 
 .input-field {
