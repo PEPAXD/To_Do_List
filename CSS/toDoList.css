@@ -11,7 +11,156 @@
 }
 
 body {
-  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   background-color: #2C3E50;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: #fff;
+  height: 37rem;
+  width: 40rem;
+}
+.Container .todohead {
+  margin-top: 1rem;
+  width: 90%;
+}
+.Container .todohead .textTitle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin: 1rem;
+  font-size: 1.4em;
+}
+.Container .todohead .textTitle i {
+  font-size: 1.4em;
+}
+.Container .todohead .inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+.Container .todohead .inputContainer h2 {
+  text-align: center;
+}
+.Container .todohead .inputContainer input {
+  width: 100%;
+  height: 100%;
+  font-size: 1.5em;
+  padding-left: 1rem;
+}
+.Container .todohead .inputContainer button {
+  width: 10%;
+  padding: 0.5rem 0rem;
+  background: rgba(46, 204, 113, 0.5);
+  color: #fff;
+  cursor: pointer;
+}
+.Container .todohead .inputContainer button:hover {
+  background: rgb(46, 204, 113);
+}
+.Container .todohead .inputContainer button:active {
+  background: rgba(46, 204, 113, 0.8);
+}
+.Container .todohead .inputContainer button i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+}
+.Container .tasksContainer {
+  margin: 1rem;
+  max-height: 26rem;
+  flex-grow: 1;
+  width: calc(100% - 2rem);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  scrollbar-width: thin;
+  border-left: solid 1px #ccc;
+}
+.Container .tasksContainer::-webkit-scrollbar {
+  width: 10px;
+  margin-right: 1rem;
+}
+.Container .tasksContainer::-webkit-scrollbar-thumb {
+  background: #A9A9A9;
+}
+.Container .tasksContainer .task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  height: 3rem;
+  padding: 0.5rem 1rem;
+  border-bottom: solid 1px #ccc;
+}
+.Container .tasksContainer .task .taskcheck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.Container .tasksContainer .task .taskcheck label {
+  max-width: 30rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1rem 0rem;
+}
+.Container .tasksContainer .task .taskcheck input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fafafa;
+  border: 2px solid #cacece;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  height: 20px;
+  width: 20px;
+  transition: all 0.3s ease-in-out;
+}
+.Container .tasksContainer .task .taskcheck input:checked {
+  background-color: #2196F3;
+  border-color: #2196F3;
+}
+.Container .tasksContainer .task .taskcheck input:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.Container .tasksContainer .task input[type=checkbox]:checked + label {
+  text-decoration: line-through;
+}
+.Container .tasksContainer .task .buttons .edit {
+  font-size: 1.2em;
+  background-color: transparent;
+  color: rgba(90, 149, 255, 0.5);
+}
+.Container .tasksContainer .task .buttons .edit:hover {
+  color: rgb(90, 149, 255);
+}
+.Container .tasksContainer .task .buttons .delete {
+  font-size: 1.2em;
+  background-color: transparent;
+  color: rgba(255, 30, 30, 0.5);
+}
+.Container .tasksContainer .task .buttons .delete:hover {
+  color: rgb(255, 30, 30);
 }/*# sourceMappingURL=toDoList.css.map */
