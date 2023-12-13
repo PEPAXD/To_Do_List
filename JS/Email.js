@@ -1,31 +1,32 @@
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { auth } from '../JS/firebase.js';
-import { showErrorToast } from '../JS/Toastify.js'
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { auth } from './firebase.js';
+import { showErrorToast } from '../JS/Toastify.js';
 
-const signupForm = document.querySelector("#SignUpForm");
-const checkDataButton = document.querySelector("#add-CheckData");
+const signInButton = document.querySelector("#add-CheckData");
 
-checkDataButton.addEventListener('click', async (e) => {
-    console.log('click');
+signInButton.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    const email = signupForm['email'].value;
-    const password = signupForm['password'].value;
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
 
     try {
-        const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(userCredentials, 'userCredentialsOK');
+        //new user
+        await createUserWithEmailAndPassword(auth, email, password);
+        window.location.href = "../HTML/toDoList.html";
 
     } catch (error) {
-        switch (error.code) {
-            case 'auth/invalid-email':
-                showErrorToast('Formato de correo electrónico inválido. Por favor, introduce una dirección de correo electrónico válida.');
-                break;
-            case 'auth/weak-password':
-                showErrorToast('Contraseña débil. Por favor, introduce una contraseña de al menos 6 caracteres.');
-                break;
-            default:
-                showErrorToast('Ocurrió un error durante el registro. Por favor, inténtalo de nuevo.');
+        if (error.code === 'auth/email-already-in-use') {
+            try {
+                //login user
+                await signInWithEmailAndPassword(auth, email, password);
+                window.location.href = "../HTML/toDoList.html";
+                
+            } catch (error) {
+                showErrorToast('Ocurrió un error durante el proceso. Por favor, inténtalo de nuevo.');
+            }
+        } else {
+            showErrorToast('Ocurrió un error durante el proceso. Por favor, inténtalo de nuevo.');
         }
     }
 });
