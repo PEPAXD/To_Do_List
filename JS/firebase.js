@@ -4,7 +4,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { ref, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { getFirestore  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
 
@@ -34,4 +34,4 @@ export { ref, set };
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
-export { doc, setDoc, getDoc };
+export { doc, setDoc, getDoc, deleteDoc };

@@ -1,14 +1,13 @@
 // DATA BASE SECTION
 import { database} from './firebase.js';
-import { doc, setDoc, getDoc } from './firebase.js';
+import { doc, setDoc, getDoc, deleteDoc } from './firebase.js';
 import { ref, set } from './firebase.js';
 import { db } from './firebase.js';
 
 
-// Save task to database
-async function save(taskId, taskText) {
+// Save tasks to database
+export async function save(taskId, taskText) {
 
-    console.log(taskId, taskText);
     try {
         await setDoc(doc(db, 'UserTest', taskId), {
             task: taskText
@@ -18,9 +17,18 @@ async function save(taskId, taskText) {
     }
 }
 
+// Delete tasks from database
+export async function remove(taskId) {
+    try {
+        await deleteDoc(doc(db, 'UserTest', taskId));
+    } catch (error) {
+        console.error("Error removing task: ", error);
+    }
+}
+
 
 // Get tasks from database
-async function getUserData(userName, taskID) {
+export async function load(userName, taskID) {
     const docRef = doc(db, userName, taskID);
 
     const docSnap = await getDoc(docRef);

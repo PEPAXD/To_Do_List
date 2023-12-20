@@ -20,9 +20,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Add task to array
             tasksArray.push({ id: taskId, text: taskText });
-        }
 
-        console.log(tasksArray);
+            // Save task to database
+            tasksArray.forEach(task => saveDatabase(task.id, task.text));
+        }
     });
 
     // Create task element
@@ -47,13 +48,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // Call editTask function
         editButton.addEventListener('click', function () {
             editTask(newTask, taskId);
-            console.log(tasksArray);
         });
 
         // Call deleteTask function
         deleteButton.addEventListener('click', function () {
             deleteTask(newTask, taskId);
-            console.log(tasksArray);
         });
 
         return newTask;
@@ -69,22 +68,39 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    //Update task
+    function updateTaskArray(taskId, newText) {
+        const taskToUpdate = tasksArray.find(task => task.id === taskId);
+        if (taskToUpdate) {
+            taskToUpdate.text = newText;
+            
+            // Save task to database
+            tasksArray.forEach(task => saveDatabase(task.id, task.text));
+        }
+    }
+
     //Delete task
     function deleteTask(taskElement, taskId) {
         taskElement.remove();
         deleteTaskFromArray(taskId);
     }
 
-    //Update task
-    function updateTaskArray(taskId, newText) {
-        const taskToUpdate = tasksArray.find(task => task.id === taskId);
-        if (taskToUpdate) {
-            taskToUpdate.text = newText;
-        }
-    }
-
     //Delete task from array
     function deleteTaskFromArray(taskId) {
         tasksArray = tasksArray.filter(task => task.id !== taskId);
+
+        // remove task to database
+        removeDatabase(taskId);
     }
 });
+
+// DATABASE CALL
+import {save, remove} from './dataBase.js';
+
+async function saveDatabase(taskId, taskText) {
+    await save(taskId, taskText);
+}
+
+async function removeDatabase(taskId) {
+    await remove(taskId);
+}
