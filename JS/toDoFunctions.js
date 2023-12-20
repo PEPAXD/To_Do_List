@@ -1,44 +1,90 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    // Get elements
     const addButton = document.querySelector('.addBtn');
     const tasksContainer = document.querySelector('.tasks');
+    const taskInput = document.querySelector('.inputContainer input');
+    let tasksArray = [];
 
+    // AddTask_Button
     addButton.addEventListener('click', function () {
-        const taskInput = document.querySelector('.inputContainer input');
         const taskText = taskInput.value.trim();
 
         if (taskText !== '') {
-            const taskId = `task-${tasksContainer.childElementCount + 1}`;
+            const taskId = `task-${tasksArray.length + 1}`;
 
-            const newTask = document.createElement('div');
-            newTask.classList.add('task');
-            newTask.innerHTML = `
-                <div class="taskcheck">
-                    <input type="checkbox" id="${taskId}">
-                    <label for="${taskId}">${taskText}</label>
-                </div>
-                <div class="buttons">
-                    <button class="edit" title="Edit"><i class="fa-solid fa-pen"></i></button>
-                    <button class="delete" title="Delete"><i class="fa-solid fa-eraser"></i></button>
-                </div>
-            `;
-
+            // Call createTaskElement
+            const newTask = createTaskElement(taskId, taskText);
             tasksContainer.appendChild(newTask);
             taskInput.value = '';
 
-            const editButton = newTask.querySelector('.edit');
-            const deleteButton = newTask.querySelector('.delete');
-
-            editButton.addEventListener('click', function (event) {
-                const label = newTask.querySelector('label');
-                const newText = prompt('Enter new text:');
-                if (newText !== null && newText.trim() !== '') {
-                    label.textContent = newText;
-                }
-            });
-
-            deleteButton.addEventListener('click', function () {
-                newTask.remove();
-            });
+            // Add task to array
+            tasksArray.push({ id: taskId, text: taskText });
         }
+
+        console.log(tasksArray);
     });
+
+    // Create task element
+    function createTaskElement(taskId, taskText) {
+        const newTask = document.createElement('div');
+
+        newTask.classList.add('task');
+        newTask.innerHTML = `
+            <div class="taskcheck">
+                <input type="checkbox" id="${taskId}">
+                <label for="${taskId}">${taskText}</label>
+            </div>
+            <div class="buttons">
+                <button class="edit" title="Edit"><i class="fa-solid fa-pen"></i></button>
+                <button class="delete" title="Delete"><i class="fa-solid fa-eraser"></i></button>
+            </div>
+        `;
+
+        const editButton = newTask.querySelector('.edit');
+        const deleteButton = newTask.querySelector('.delete');
+
+        // Call editTask function
+        editButton.addEventListener('click', function () {
+            editTask(newTask, taskId);
+            console.log(tasksArray);
+        });
+
+        // Call deleteTask function
+        deleteButton.addEventListener('click', function () {
+            deleteTask(newTask, taskId);
+            console.log(tasksArray);
+        });
+
+        return newTask;
+    }
+
+    //Edit task
+    function editTask(taskElement, taskId) {
+        const label = taskElement.querySelector('label');
+        const newText = prompt('Enter new text:');
+        if (newText !== null && newText.trim() !== '') {
+            label.textContent = newText;
+            updateTaskArray(taskId, newText); 
+        }
+    }
+
+    //Delete task
+    function deleteTask(taskElement, taskId) {
+        taskElement.remove();
+        deleteTaskFromArray(taskId);
+    }
+
+    //Update task
+    function updateTaskArray(taskId, newText) {
+        const taskToUpdate = tasksArray.find(task => task.id === taskId);
+        if (taskToUpdate) {
+            taskToUpdate.text = newText;
+        }
+    }
+
+    //Delete task from array
+    function deleteTaskFromArray(taskId) {
+        tasksArray = tasksArray.filter(task => task.id !== taskId);
+    }
 });
