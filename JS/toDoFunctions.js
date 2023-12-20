@@ -4,15 +4,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     addButton.addEventListener('click', function () {
         const taskInput = document.querySelector('.inputContainer input');
-        const taskText = taskInput.value;
-        if (taskText.trim() !== '') {
+        const taskText = taskInput.value.trim();
+
+        if (taskText !== '') {
+            const taskId = `task-${tasksContainer.childElementCount + 1}`;
+
             const newTask = document.createElement('div');
             newTask.classList.add('task');
-
             newTask.innerHTML = `
                 <div class="taskcheck">
-                    <input type="checkbox" id="task-${tasksContainer.childElementCount + 1}">
-                    <label for="task-${tasksContainer.childElementCount + 1}">${taskText}</label>
+                    <input type="checkbox" id="${taskId}">
+                    <label for="${taskId}">${taskText}</label>
                 </div>
                 <div class="buttons">
                     <button class="edit" title="Edit"><i class="fa-solid fa-pen"></i></button>
@@ -23,23 +25,19 @@ document.addEventListener('DOMContentLoaded', function () {
             tasksContainer.appendChild(newTask);
             taskInput.value = '';
 
-            // Event listener for the 'Edit' button of the new task
             const editButton = newTask.querySelector('.edit');
-            editButton.addEventListener('click', function (event) {
-                const task = event.target.closest('.task');
-                const label = task.querySelector('label');
+            const deleteButton = newTask.querySelector('.delete');
 
+            editButton.addEventListener('click', function (event) {
+                const label = newTask.querySelector('label');
                 const newText = prompt('Enter new text:');
                 if (newText !== null && newText.trim() !== '') {
                     label.textContent = newText;
                 }
             });
 
-            // Event listener para el botón "Delete" de la nueva tarea
-            const deleteButton = newTask.querySelector('.delete');
-            deleteButton.addEventListener('click', function (event) {
-                const task = event.target.closest('.task');
-                task.remove(); // Eliminar la tarea al presionar el botón de eliminar
+            deleteButton.addEventListener('click', function () {
+                newTask.remove();
             });
         }
     });
