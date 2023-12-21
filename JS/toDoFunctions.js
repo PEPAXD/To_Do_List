@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    //CalluserLogin
-    chechUser();
+    // Get user
+    getUser().then(userName => {
+        console.log(userName);
+    }).catch(error => {
+        console.error(error);
+    });
 
     // Get elements
     const addButton = document.querySelector('.addBtn');
@@ -25,7 +29,11 @@ document.addEventListener('DOMContentLoaded', function () {
             tasksArray.push({ id: taskId, text: taskText });
 
             // Save task to database
-            tasksArray.forEach(task => saveDatabase(task.id, task.text));
+            getUser().then(userName => {
+                updateTaskArray(taskId, taskText, userName); 
+            }).catch(error => {
+                console.error(error);
+            });
         }
     });
 
@@ -61,6 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return newTask;
     }
 
+    
+
     //Edit task
     function editTask(taskElement, taskId) {
         const label = taskElement.querySelector('label');
@@ -78,7 +88,12 @@ document.addEventListener('DOMContentLoaded', function () {
             taskToUpdate.text = newText;
             
             // Save task to database
-            tasksArray.forEach(task => saveDatabase(task.id, task.text));
+            getUser().then(userName => {
+                saveDatabase(taskId, newText, userName);
+
+            }).catch(error => {
+                console.error(error);
+            });
         }
     }
 
@@ -98,16 +113,29 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // DATABASE CALL
-import {userLogin, save, remove} from './dataBase.js';
+import {onAuthStateChanged, auth} from './firebase.js';
+import {save, remove} from './dataBase.js';
 
-function chechUser() {
-    userLogin();
+function getUser() {
+    return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userNameElement = document.querySelector('.loginUser h4');
+                userNameElement.textContent = user.displayName || user.email;
+                resolve(user.displayName || user.email);
+            } else {
+                console.log('No user is signed in');
+                reject('No user is signed in');
+            }
+        });
+    });
 }
 
-async function saveDatabase(taskId, taskText) {
-    await save(taskId, taskText);
+async function saveDatabase(taskId, taskText, userName) {
+    await save(taskId, taskText, userName);
 }
 
 async function removeDatabase(taskId) {
     await remove(taskId);
 }
+

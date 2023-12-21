@@ -1,22 +1,12 @@
 // DATA BASE SECTION
-import { doc, setDoc, getDoc, deleteDoc } from './firebase.js';
+import { doc, setDoc, getDocs, deleteDoc, collection } from './firebase.js';
 import { db } from './firebase.js';
-import { auth, onAuthStateChanged } from './firebase.js';
-
-
-//userLogin
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        const userNameElement = document.querySelector('.loginUser h4');
-        userNameElement.textContent = user.displayName || user.email;
-    }
-});
 
 // Save tasks to database
-export async function save(taskId, taskText) {
+export async function save(taskId, taskText, userName) {
 
     try {
-        await setDoc(doc(db, 'UserTest', taskId), {
+        await setDoc(doc(db, userName, taskId), {
             task: taskText
         });
     } catch (error) {
@@ -35,14 +25,15 @@ export async function remove(taskId) {
 
 
 // Get tasks from database
-export async function load(userName, taskID) {
-    const docRef = doc(db, userName, taskID);
+export async function load(userName) {
+    const tasksCollectionRef = collection(db, userName);
+    const tasksSnapshot = await getDocs(tasksCollectionRef);
 
-    const docSnap = await getDoc(docRef);
+    const tasks = [];
 
-    if (docSnap.exists()) {
-        console.log(taskID, docSnap.data());
-    } else {
-        console.log("error - no such document")
-    }
+    tasksSnapshot.forEach((doc) => {
+        tasks.push({ id: doc.id, data: doc.data() });
+    });
+
+    return tasks;
 }
