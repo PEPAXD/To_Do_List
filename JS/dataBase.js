@@ -1,9 +1,16 @@
 // DATA BASE SECTION
-import { database} from './firebase.js';
 import { doc, setDoc, getDoc, deleteDoc } from './firebase.js';
-import { ref, set } from './firebase.js';
 import { db } from './firebase.js';
+import { auth, onAuthStateChanged } from './firebase.js';
 
+
+//userLogin
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const userNameElement = document.querySelector('.loginUser h4');
+        userNameElement.textContent = user.displayName || user.email;
+    }
+});
 
 // Save tasks to database
 export async function save(taskId, taskText) {

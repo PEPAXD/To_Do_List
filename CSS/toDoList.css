@@ -31,7 +31,12 @@ body {
   margin-top: 1rem;
   width: 90%;
 }
-.Container .todohead .textTitle {
+.Container .todohead .headerTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.Container .todohead .headerTitle .title {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -39,8 +44,35 @@ body {
   margin: 1rem;
   font-size: 1.4em;
 }
-.Container .todohead .textTitle i {
+.Container .todohead .headerTitle .title i {
   font-size: 1.4em;
+}
+.Container .todohead .headerTitle .loginUser {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  font-size: 1em;
+  transition: all 0.1s ease-in-out;
+}
+.Container .todohead .headerTitle .loginUser:hover {
+  cursor: pointer;
+  color: #436f9b;
+}
+.Container .todohead .headerTitle .loginUser button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  background: transparent;
+  transition: all 0.1s ease-in-out;
+}
+.Container .todohead .headerTitle .loginUser button i {
+  padding: 1rem;
+}
+.Container .todohead .headerTitle .loginUser button:hover {
+  cursor: pointer;
+  color: #436f9b;
 }
 .Container .todohead .inputContainer {
   display: flex;

@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    //CalluserLogin
+    chechUser();
+
     // Get elements
     const addButton = document.querySelector('.addBtn');
     const tasksContainer = document.querySelector('.tasks');
@@ -95,7 +98,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // DATABASE CALL
-import {save, remove} from './dataBase.js';
+import {userLogin, save, remove} from './dataBase.js';
+
+function chechUser() {
+    userLogin();
+}
 
 async function saveDatabase(taskId, taskText) {
     await save(taskId, taskText);
