@@ -1,5 +1,5 @@
 // DATA BASE SECTION
-import { doc, setDoc, getDocs, deleteDoc, collection } from './firebase.js';
+import { doc, setDoc, getDocs, deleteDoc, collection} from './firebase.js';
 import { db } from './firebase.js';
 
 // Save tasks to database
@@ -15,9 +15,9 @@ export async function save(taskId, taskText, userName) {
 }
 
 // Delete tasks from database
-export async function remove(taskId) {
+export async function remove(taskId, userName) {
     try {
-        await deleteDoc(doc(db, 'UserTest', taskId));
+        await deleteDoc(doc(db, userName, taskId));
     } catch (error) {
         console.error("Error removing task: ", error);
     }

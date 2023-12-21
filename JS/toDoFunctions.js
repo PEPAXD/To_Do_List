@@ -108,7 +108,12 @@ document.addEventListener('DOMContentLoaded', function () {
         tasksArray = tasksArray.filter(task => task.id !== taskId);
 
         // remove task to database
-        removeDatabase(taskId);
+
+        getUser().then(userName => {
+            removeDatabase(taskId, userName);
+        }).catch(error => {
+            console.error(error);
+        });
     }
 });
 
@@ -135,7 +140,7 @@ async function saveDatabase(taskId, taskText, userName) {
     await save(taskId, taskText, userName);
 }
 
-async function removeDatabase(taskId) {
-    await remove(taskId);
+async function removeDatabase(taskId, userName) {
+    await remove(taskId, userName);
 }
 
