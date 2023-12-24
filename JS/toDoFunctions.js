@@ -2,10 +2,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Get user
     getUser().then(userName => {
-        console.log(userName);
+        const username = userName;
+
+        // create tasks from database
+        createCollection(username);
+        loadCollection(username);
+
     }).catch(error => {
         console.error(error);
     });
+
+
 
     // Get elements
     const addButton = document.querySelector('.addBtn');
@@ -119,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // DATABASE CALL
 import {onAuthStateChanged, auth} from './firebase.js';
-import {save, remove} from './dataBase.js';
+import {save, remove, createUserCollection, loadUserCollection} from './dataBase.js';
 
 function getUser() {
     return new Promise((resolve, reject) => {
@@ -142,5 +149,13 @@ async function saveDatabase(taskId, taskText, userName) {
 
 async function removeDatabase(taskId, userName) {
     await remove(taskId, userName);
+}
+
+async function createCollection(userName) {
+    await createUserCollection(userName);
+}
+
+async function loadCollection(userName) {
+    await loadUserCollection(userName);
 }
 
