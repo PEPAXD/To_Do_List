@@ -6,7 +6,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // create tasks from database
         createCollection(username);
-        loadCollection(username);
+
+        // load tasks from database
+        loadCollection(username)
+        .then(tasks => {
+            tasks.slice(1).forEach(task => {
+                const newTaskElement = createTaskElement(task.id, JSON.stringify(task.data.task));
+                tasksContainer.appendChild(newTaskElement);
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
 
     }).catch(error => {
         console.error(error);
@@ -156,6 +167,6 @@ async function createCollection(userName) {
 }
 
 async function loadCollection(userName) {
-    await loadUserCollection(userName);
+    return await loadUserCollection(userName);
 }
 

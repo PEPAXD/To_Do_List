@@ -7,7 +7,7 @@ export async function createUserCollection(userName) {
 
     //Create DataDocument
     try {
-        const docRef = doc(db, userName, "task-1");
+        const docRef = doc(db, userName, "task-0");
         await setDoc(docRef, {
             task: "task-User"
         });
@@ -17,13 +17,20 @@ export async function createUserCollection(userName) {
     }
 }
 
-// load collection user
 export async function loadUserCollection(userName) {
 
+    const tasks = [];
     const querySnapshot = await getDocs(collection(db, userName));
+    
     querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+        const task = {
+            id: doc.id,
+            data: doc.data()
+        };
+        tasks.push(task);
     });
+
+    return tasks;
 }
 
 // Save tasks to database
