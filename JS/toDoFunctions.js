@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         loadCollection(username)
         .then(tasks => {
             tasks.slice(1).forEach(task => {
-                const newTaskElement = createTaskElement(task.id, JSON.stringify(task.data.task));
+                const newTaskElement = createTaskElement(task.id, task.data.task);
                 tasksContainer.appendChild(newTaskElement);
             });
         })
