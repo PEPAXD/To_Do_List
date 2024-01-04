@@ -12,7 +12,7 @@ googleButton.addEventListener('click', async (e) => {
 
     try {
         const result = await signInWithPopup(auth, provider);
-        window.location.href = '/TO_DO_LIST/HTML/toDoList.html';
+        window.location.href = '/To_Do_List/HTML/toDoList.html';
 
 
     } catch (error) {
