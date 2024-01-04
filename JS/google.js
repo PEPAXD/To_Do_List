@@ -12,7 +12,8 @@ googleButton.addEventListener('click', async (e) => {
 
     try {
         const result = await signInWithPopup(auth, provider);
-        window.location.href = './HTML/toDoList.html';
+        window.location.href = '/TO_DO_LIST/HTML/toDoList.html';
+
 
     } catch (error) {
         showErrorToast('Ocurrió un error durante el registro');
