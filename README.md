@@ -2,7 +2,7 @@
 
 This project is a simple To-Do List web application created using HTML, CSS, and JavaScript. It utilizes Firebase Firestore for database management.
 
-![screenshot](screenshot.jpg)
+![screenshot](2.jpg)
 
 ## Description
 The To-Do List web app allows users to create, manage, and organize their tasks in a simple and intuitive interface. It offers functionalities such as adding tasks, marking them as completed, editing existing tasks, and deleting tasks.
