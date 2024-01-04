@@ -13,14 +13,14 @@ signInButton.addEventListener('click', async (e) => {
     try {
         //new user
         await createUserWithEmailAndPassword(auth, email, password);
-        window.location.href = "../HTML/toDoList.html";
+        window.location.href = '/To_Do_List/HTML/toDoList.html';
 
     } catch (error) {
         if (error.code === 'auth/email-already-in-use') {
             try {
                 //login user
                 await signInWithEmailAndPassword(auth, email, password);
-                window.location.href = "../HTML/toDoList.html";
+                window.location.href = '/To_Do_List/HTML/toDoList.html';
                 
             } catch (error) {
                 showErrorToast('Ocurrió un error durante el proceso. Por favor, inténtalo de nuevo.');
